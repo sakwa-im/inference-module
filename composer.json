@@ -1,0 +1,12 @@
+{
+    "require-dev": {
+        "apache/log4php": "^2.3",
+        "phpunit/phpunit": "^6.2"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Sakwa\\": "Sakwa/"
+        }
+    }
+}
