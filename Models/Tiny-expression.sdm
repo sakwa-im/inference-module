@@ -31,7 +31,7 @@
     <initialize-mode>SessionStartDefaultValue</initialize-mode>
     <persist-mode>Never</persist-mode>
     <data-connections />
-    <char-variable-value>AA</char-variable-value>
+    <char-variable-value>BB</char-variable-value>
   </record>
   <record>
     <class-type>sakwa.CharVariableImpl</class-type>

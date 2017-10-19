@@ -6,7 +6,7 @@ composer install
 
 echo "Changing file and folder permissions"
 chmod -R 0644 Logging/Output
-chmod 0666 Sakwa/Expression/Parser/Transformations.php
+chmod 0666 Sakwa/Expression/Parser/Element/Transformations.php
 
 echo "Regenerating expression parser statemachine transitions"
 cd Scripts

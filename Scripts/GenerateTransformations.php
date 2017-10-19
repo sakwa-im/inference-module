@@ -6,7 +6,7 @@ include __DIR__."/../Sakwa/Utils/Bootstrap.php";
 
 use ReflectionClass;
 
-$obj = new ReflectionClass('\Sakwa\Expression\Parser\Base');
+$obj = new ReflectionClass('\Sakwa\Expression\Parser\Element\Base');
 $constants = $obj->getConstants();
 
 $transformations = array();
@@ -45,7 +45,7 @@ foreach ($transformations as $key => $value) {
 
 $key_length++;
 
-$code  = '<'."?php\n\nnamespace Sakwa\Expression\Parser;\n\nabstract class Transformations\n{\n";
+$code  = '<'."?php\n\nnamespace Sakwa\Expression\Parser\Element;\n\nabstract class Transformations\n{\n";
 $code .= '    const '.str_pad($first_key, $key_length, ' ', STR_PAD_RIGHT).' = \''.array_shift($transformations).'\'';
 
 foreach ($transformations as $key => $value) {
@@ -54,4 +54,4 @@ foreach ($transformations as $key => $value) {
 
 $code .= ";\n}";
 
-file_put_contents(\Sakwa\Utils\File::createFilePath('Sakwa', 'Expression', 'Parser', 'Transformations.php'), $code);
+file_put_contents(\Sakwa\Utils\File::createFilePath('Sakwa', 'Expression', 'Parser', 'Element', 'Transformations.php'), $code);

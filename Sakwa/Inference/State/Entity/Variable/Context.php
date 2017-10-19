@@ -158,7 +158,7 @@ class Context
 
         if (!is_null($newEndIndex)) {
             $this->revisions = array_slice($this->revisions, 0, $newEndIndex + 1);
-            $this->dirty     = false;
+            $this->dirty     = $dirty;
 
             return true;
         }
