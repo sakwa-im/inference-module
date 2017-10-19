@@ -103,7 +103,7 @@ class Value
         if (($this->isLiteral()  && is_string($value))  ||
             ($this->isNumeric()  && is_numeric($value)) ||
             ($this->isOperator() && is_string($value))  ||
-            ($this->isBoolean()  && is_boolean($value)) ||
+            ($this->isBoolean()  && is_bool($value)) ||
             ($this->isEntity()   && is_object($value))  ||
             ($this->isNull()     && is_null($value))) {
             $this->value = $value;

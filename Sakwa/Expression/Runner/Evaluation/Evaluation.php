@@ -1,6 +1,6 @@
 <?php
 
-namespace Sakwa\Expression\Runner;
+namespace Sakwa\Expression\Runner\Evaluation;
 
 use Sakwa\Exception;
 use Sakwa\Expression\Runner\Evaluation\Value;
@@ -9,19 +9,9 @@ use Sakwa\Logging\LogTrait;
 /**
  * Calculates the result by passed values and operator.
  */
-class Evaluation
+class Evaluation extends Base
 {
     use LogTrait;
-
-    /**
-     * @var Value
-     */
-    protected $elementLeft;
-
-    /**
-     * @var Value
-     */
-    protected $elementRight;
 
     /**
      * @var string
@@ -31,7 +21,7 @@ class Evaluation
     /**
      * @var string[]
      */
-    protected $validOperators = array('+', '-', '/', '*', '^', '%', '=', '!', '>', '<', '==', '!=', '<=', '>=', '=');
+    protected $validOperators = array('+', '-', '/', '*', '^', '%', '=', '!', '>', '<', '==', '!=', '<=', '>=');
 
     /**
      * Evaluation constructor.
@@ -42,8 +32,7 @@ class Evaluation
      */
     public function __construct($elementLeft, $elementRight, $operator)
     {
-        $this->elementLeft = $elementLeft;
-        $this->elementRight = $elementRight;
+        parent::__construct($elementLeft, $elementRight);
         $this->operator = $operator->getValue();
     }
 
@@ -73,14 +62,6 @@ class Evaluation
         self::debug("$elementLeft $this->operator $elementRight");
 
         switch ($this->operator) {
-            case '=':
-                //TODO: zoek naar een betere plaats voor dit ding
-                /* @var \Sakwa\Inference\State\Entity\Base $elementLeft */
-                $this->elementLeft->getValue()->setValue($elementRight);
-
-                $result = new Value($elementRight); //TODO type ophalen en er in fietsen....
-                break;
-
             case '+':
                 if ($this->elementLeft->isLiteral() || $this->elementRight->isLiteral()) {
                     $result = new Value($elementLeft . $elementRight, Value::IS_LITERAL);

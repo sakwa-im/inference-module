@@ -5,6 +5,7 @@ namespace Sakwa\Expression\Parser;
 use Sakwa\Utils\Guid;
 use Sakwa\Expression\Parser\Element\Base;
 use Sakwa\Inference\State\Manager;
+use Sakwa\Expression\Runner\Evaluation\Value as EvaluationValue;
 
 class Element extends Base
 {
@@ -168,6 +169,23 @@ class Element extends Base
         }
 
         return $output;
+    }
+
+    /**
+     * @return EvaluationValue
+     */
+    public function getValue()
+    {
+        if ($this->getElementType() == \Sakwa\Expression\Parser\Element::TOKEN_VARIABLE_IDENTIFIER) {
+            return new EvaluationValue($this->getEntity(), EvaluationValue::IS_ENTITY);
+        }
+        elseif (in_array($this->getElementType(), array(\Sakwa\Expression\Parser\Element::TOKEN_OPERATOR, \Sakwa\Expression\Parser\Element::TOKEN_LOGIC_OPERATOR))) {
+            return new EvaluationValue($this->getToken(), EvaluationValue::IS_OPERATOR);
+        }
+        else {
+            //TODO: refactor?
+            return new EvaluationValue($this->getToken(), (($this->getElementType() == Element::TOKEN_LITERAL) ? EvaluationValue::IS_LITERAL : EvaluationValue::IS_NUMERIC));
+        }
     }
 
     /**

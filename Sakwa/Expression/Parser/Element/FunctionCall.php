@@ -69,7 +69,7 @@ class FunctionCall extends Element
     }
 
     /**
-     * @return mixed|null|\Sakwa\Inference\State\Entity\DomainObject\MethodCall
+     * @return null|\Sakwa\Expression\Runner\Evaluation\Value|\Sakwa\Inference\State\Entity\DomainObject\MethodCall
      */
     public function evaluate()
     {
@@ -92,6 +92,14 @@ class FunctionCall extends Element
             //TODO: mechanisme checken op compatibiliteit met Evaluation\Value
             return $entity->callMethod($this->getToken(), $parameters);
         }
+    }
+
+    /**
+     * @return null|\Sakwa\Expression\Runner\Evaluation\Value|\Sakwa\Inference\State\Entity\DomainObject\MethodCall
+     */
+    public function getValue()
+    {
+        return $this->evaluate();
     }
 
     /**

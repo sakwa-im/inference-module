@@ -5,7 +5,7 @@ namespace Sakwa\Expression;
 use Sakwa\Exception;
 use Sakwa\Logging\LogTrait;
 use Sakwa\Expression\Runner\Evaluation\Value as EvaluationValue;
-use Sakwa\Expression\Parser\Element;
+use Sakwa\Expression\Runner\Evaluation\Factory;
 
 class Runner {
 
@@ -15,24 +15,14 @@ class Runner {
     const RUNNER_EXCEPTION_INVALID_OPERATOR = 2;
 
     /**
-     * @var array
-     */
-    protected $entities = array();
-
-    /**
      * @var \Sakwa\Expression\Parser\Element $element
      */
     protected $element;
 
     /**
-     * Fuction for setting entitys
-     * @param string $entityName
-     * @param mixed $entityValue
+     * @var \Sakwa\Inference\State\Manager $entityManager
      */
-    public function createEntity($entityName, $entityValue)
-    {
-        $this->entities[$entityName] = $entityValue;
-    }
+    protected $entityManager;
 
     /**
      * @param \Sakwa\Expression\Parser\Element $element
@@ -71,16 +61,10 @@ class Runner {
         $subEvaluation = array();
 
         foreach ($children as $child) {
-            if ($child->getElementType() == \Sakwa\Expression\Parser\Element::TOKEN_FUNCTION_CALL) {
-                $value = $child->evaluate();
-            } elseif ($child->getElementType() == \Sakwa\Expression\Parser\Element::TOKEN_VARIABLE_IDENTIFIER) {
-                $value = new EvaluationValue($child->getEntity(), EvaluationValue::IS_ENTITY);
-            } elseif ($child->getElementType() == \Sakwa\Expression\Parser\Element::TOKEN_GROUP) {
+            if ($child->getElementType() == \Sakwa\Expression\Parser\Element::TOKEN_GROUP) {
                 $value = $this->runElement($child);
-            } elseif (in_array($child->getElementType(), array(\Sakwa\Expression\Parser\Element::TOKEN_OPERATOR, \Sakwa\Expression\Parser\Element::TOKEN_LOGIC_OPERATOR))) {
-                $value = new EvaluationValue($child->getToken(), EvaluationValue::IS_OPERATOR);
             } else {
-                $value = new EvaluationValue($child->getToken(), (($child->getElementType() == Element::TOKEN_LITERAL) ? EvaluationValue::IS_LITERAL : EvaluationValue::IS_NUMERIC));
+                $value = $child->getValue();
             }
 
             // Handle expressions having only one value.
@@ -91,9 +75,15 @@ class Runner {
             // Split expressions into subexpressions having two values and an operator.
             $subEvaluation[] = $value;
             if (count($subEvaluation) == 3) {
-                $evaluation = new \Sakwa\Expression\Runner\Evaluation($subEvaluation[0], $subEvaluation[2], $subEvaluation[1]);
-                $result = $evaluation->evaluate();
+                /**
+                 * @var EvaluationValue $left
+                 * @var EvaluationValue $operator
+                 * @var EvaluationValue $right
+                 */
+                list($left, $operator, $right) = $subEvaluation;
 
+                $handler = Factory::createEvaluationHandler($left, $right, $operator);
+                $result  = $handler->evaluate();
                 $subEvaluation = array($result);
             }
         }
