@@ -2,6 +2,8 @@
 
 namespace Sakwa\Expression\Runner\Evaluation;
 
+use Sakwa\Expression\Parser\Element;
+
 /**
  * Calculates the result by passed values and operator.
  */
@@ -13,11 +15,17 @@ class Factory
      * @param Value $elementLeft
      * @param Value $elementRight
      * @param Value $operator
+     *
+     * @return \Sakwa\Expression\Runner\Evaluation\Base
      */
     public static function createEvaluationHandler(Value $elementLeft, Value $elementRight, Value $operator)
     {
-        //TODO: fix check op character =
-        if ($operator->getValue() == '=') {
+        /**
+         * @var \Sakwa\Expression\Parser\Element $element
+         */
+        $element = $operator->getValue();
+
+        if ($element->getElementType() == Element::TOKEN_ASSIGNMENT_OPERATOR) {
             return new Assignment($elementLeft, $elementRight);
         }
         else {

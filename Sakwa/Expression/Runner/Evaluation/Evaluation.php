@@ -3,25 +3,34 @@
 namespace Sakwa\Expression\Runner\Evaluation;
 
 use Sakwa\Exception;
-use Sakwa\Expression\Runner\Evaluation\Value;
-use Sakwa\Logging\LogTrait;
 
 /**
  * Calculates the result by passed values and operator.
  */
 class Evaluation extends Base
 {
-    use LogTrait;
-
     /**
-     * @var string
+     * @var string $operator
      */
     protected $operator;
 
     /**
-     * @var string[]
+     * @var array $operators
      */
-    protected $validOperators = array('+', '-', '/', '*', '^', '%', '=', '!', '>', '<', '==', '!=', '<=', '>=');
+    protected $operators = array(
+        '+'  => 'adition',
+        '-'  => 'minus',
+        '/'  => 'devision',
+        '*'  => 'multiplication',
+        '^'  => 'pow',
+        '%'  => 'modulus',
+        '!'  => 'evaluateNotEqual',
+        '>'  => 'lower',
+        '<'  => 'greater',
+        '==' => 'equals',
+        '!=' => 'notEqual',
+        '<=' => 'lowerThenEquals',
+        '>=' => 'greaterThenEquals');
 
     /**
      * Evaluation constructor.
@@ -33,7 +42,12 @@ class Evaluation extends Base
     public function __construct($elementLeft, $elementRight, $operator)
     {
         parent::__construct($elementLeft, $elementRight);
-        $this->operator = $operator->getValue();
+        /**
+         * @var \Sakwa\Expression\Parser\Element $element
+         */
+        $element = $operator->getValue();
+
+        $this->operator = $element->getToken();
     }
 
     /**
@@ -61,57 +75,9 @@ class Evaluation extends Base
 
         self::debug("$elementLeft $this->operator $elementRight");
 
-        switch ($this->operator) {
-            case '+':
-                if ($this->elementLeft->isLiteral() || $this->elementRight->isLiteral()) {
-                    $result = new Value($elementLeft . $elementRight, Value::IS_LITERAL);
-                } else {
-                    $result = new Value($elementLeft + $elementRight);
-                }
-                break;
-            case '-':
-                $result = new Value($elementLeft - $elementRight);
-                break;
-            case '/':
-                $result = new Value($elementLeft / $elementRight);
-                break;
-            case '*':
-                $result = new Value($elementLeft * $elementRight);
-                break;
-            case '^':
-                $result = new Value(pow($elementLeft, $elementRight));
-                break;
-            case '%':
-                $result = new Value($elementLeft % $elementRight);
-                break;
-            case '!':
-                $result = new Value($elementLeft != $elementRight);
-                break;
-            case '>':
-                $result = new Value($elementLeft > $elementRight);
-                break;
-            case '<':
-                $result = new Value($elementLeft < $elementRight);
-                break;
+        $functionName = 'evaluate'.ucfirst($this->operators[$this->operator]);
 
-            case '==':
-                $result = new Value(($elementLeft == $elementRight), Value::IS_BOOLEAN);
-                break;
-            case '!=':
-                $result = new Value(($elementLeft != $elementRight), Value::IS_BOOLEAN);
-                break;
-            case '>=':
-                $result = new Value(($elementLeft >= $elementRight), Value::IS_BOOLEAN);
-                break;
-            case '<=':
-                $result = new Value(($elementLeft <= $elementRight), Value::IS_BOOLEAN);
-                break;
-            default:
-                $result = new Value(null);
-                break;
-        }
-
-        return $result;
+        return $this->$functionName($elementLeft, $elementRight);
     }
 
     /**
@@ -121,7 +87,72 @@ class Evaluation extends Base
      */
     protected function isValidOperator()
     {
-        return in_array($this->operator, $this->validOperators);
+        $operator_keys = array_keys($this->operators);
+        return in_array($this->operator, $operator_keys);
+    }
+
+
+    protected function evaluateAdition($elementLeft, $elementRight)
+    {
+        if ($this->elementLeft->isLiteral() || $this->elementRight->isLiteral()) {
+            return new Value($elementLeft . $elementRight, Value::IS_LITERAL);
+        }
+        return new Value($elementLeft + $elementRight);
+    }
+
+    protected function evaluateMinus($elementLeft, $elementRight)
+    {
+        return new Value($elementLeft - $elementRight);
+    }
+
+    protected function evaluateDevision($elementLeft, $elementRight)
+    {
+        return new Value($elementLeft / $elementRight);
+    }
+
+    protected function evaluateMultiplication($elementLeft, $elementRight)
+    {
+        return new Value($elementLeft * $elementRight);
+    }
+
+    protected function evaluatePow($elementLeft, $elementRight)
+    {
+        return new Value(pow($elementLeft, $elementRight));
+    }
+
+    protected function evaluateModulus($elementLeft, $elementRight)
+    {
+        return new Value($elementLeft % $elementRight);
+    }
+
+    protected function evaluateEquals($elementLeft, $elementRight)
+    {
+        return new Value(($elementLeft == $elementRight), Value::IS_BOOLEAN);
+    }
+
+    protected function evaluateLower($elementLeft, $elementRight)
+    {
+        return new Value($elementLeft < $elementRight);
+    }
+
+    protected function evaluateGreater($elementLeft, $elementRight)
+    {
+        return new Value($elementLeft > $elementRight);
+    }
+
+    protected function evaluateNotEqual($elementLeft, $elementRight)
+    {
+        return new Value(($elementLeft != $elementRight), Value::IS_BOOLEAN);
+    }
+
+    protected function evaluateLowerThenEquals($elementLeft, $elementRight)
+    {
+        return new Value(($elementLeft <= $elementRight), Value::IS_BOOLEAN);
+    }
+
+    protected function evaluateGreaterThenEquals($elementLeft, $elementRight)
+    {
+        return new Value(($elementLeft >= $elementRight), Value::IS_BOOLEAN);
     }
 
 }

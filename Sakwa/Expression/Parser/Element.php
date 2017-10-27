@@ -179,8 +179,8 @@ class Element extends Base
         if ($this->getElementType() == \Sakwa\Expression\Parser\Element::TOKEN_VARIABLE_IDENTIFIER) {
             return new EvaluationValue($this->getEntity(), EvaluationValue::IS_ENTITY);
         }
-        elseif (in_array($this->getElementType(), array(\Sakwa\Expression\Parser\Element::TOKEN_OPERATOR, \Sakwa\Expression\Parser\Element::TOKEN_LOGIC_OPERATOR))) {
-            return new EvaluationValue($this->getToken(), EvaluationValue::IS_OPERATOR);
+        elseif ($this->isElementTypeOfTheOperatorFamily()) {
+            return new EvaluationValue($this, EvaluationValue::IS_OPERATOR);
         }
         else {
             //TODO: refactor?

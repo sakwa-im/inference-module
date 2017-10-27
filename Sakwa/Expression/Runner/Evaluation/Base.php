@@ -31,4 +31,12 @@ abstract class Base
         $this->elementLeft = $elementLeft;
         $this->elementRight = $elementRight;
     }
+
+    /**
+     * Returns the calculated result.
+     *
+     * @return Value
+     * @throws Exception
+     */
+    public abstract function evaluate();
 }

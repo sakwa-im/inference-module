@@ -3,15 +3,12 @@
 namespace Sakwa\Expression\Runner\Evaluation;
 
 use Sakwa\Exception;
-use Sakwa\Logging\LogTrait;
 
 /**
  * Calculates the result by passed values and operator.
  */
 class Assignment extends Base
 {
-    use LogTrait;
-
     /**
      * Returns the calculated result.
      *
