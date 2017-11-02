@@ -20,7 +20,6 @@ class DomainObject extends Base  {
         if (!$this->node_is_evaluated) {
             $this->node_is_evaluated = true;
 
-
             $entityManager = Manager::getInstance();
             $domainObject = $entityManager->createDomainObject($this->node->getReference());
 

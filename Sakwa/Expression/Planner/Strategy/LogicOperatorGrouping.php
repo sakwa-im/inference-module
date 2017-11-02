@@ -4,6 +4,13 @@ namespace Sakwa\Expression\Planner\Strategy;
 
 use Sakwa\Expression\Parser\Element;
 
+/**
+ * Class FunctionCallLogicalGrouping
+ *
+ * This optimiser class is used for adding grouping to ensure the correct order of execution when using logic operators
+ *
+ * @package Sakwa\Expression\Planner\Strategy
+ */
 class LogicOperatorGrouping extends Base
 {
     public function evaluate(\Sakwa\Expression\Parser\Element $element)

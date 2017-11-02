@@ -183,8 +183,16 @@ class Element extends Base
             return new EvaluationValue($this, EvaluationValue::IS_OPERATOR);
         }
         else {
-            //TODO: refactor?
-            return new EvaluationValue($this->getToken(), (($this->getElementType() == Element::TOKEN_LITERAL) ? EvaluationValue::IS_LITERAL : EvaluationValue::IS_NUMERIC));
+            switch ($this->getElementType()) {
+                case Element::TOKEN_LITERAL:
+                    $value = new EvaluationValue($this->getToken(), EvaluationValue::IS_LITERAL);
+                    break;
+                default:
+                    $value = new EvaluationValue($this->getToken(), EvaluationValue::IS_NUMERIC);
+                    break;
+            }
+
+            return $value;
         }
     }
 

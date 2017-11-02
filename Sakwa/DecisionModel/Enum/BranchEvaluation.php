@@ -8,11 +8,11 @@ namespace Sakwa\DecisionModel\Enum;
  */
 class BranchEvaluation extends Base
 {
-    const once = 0,
+    const once   = 0,
           always = 1;
 
     public static $enum = array(
-        self::once => 'Once',
+        self::once   => 'Once',
         self::always => 'Always'
     );
 

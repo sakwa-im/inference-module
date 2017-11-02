@@ -83,6 +83,11 @@ class Record
     public $intVariableStepvalue = null;
 
     /**
+     * @var string
+     */
+    public $dateVariable = null;
+
+    /**
      * @var string 
      */
     public $enumVariable = null;

@@ -89,7 +89,6 @@ class FunctionCall extends Element
             $entityManager = \Sakwa\Inference\State\Manager::getInstance();
             $entity = $entityManager->getEntity($this->getEntityReference());
 
-            //TODO: mechanisme checken op compatibiliteit met Evaluation\Value
             return $entity->callMethod($this->getToken(), $parameters);
         }
     }

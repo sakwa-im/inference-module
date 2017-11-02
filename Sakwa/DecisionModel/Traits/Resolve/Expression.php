@@ -12,7 +12,7 @@ trait Expression {
     /**
      * @var string
      */
-    private $expression;
+    private $expression = '';
 
 
     /**

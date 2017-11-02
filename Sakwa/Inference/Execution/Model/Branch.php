@@ -43,8 +43,6 @@ class Branch extends Base {
 
             $engine = new Engine();
             $engine->setExpression($this->node->getExpression());
-            //TODO: wat te doen bij branching i.c.m. domein objects, specifieker collecties/sets???
-            //TODO: valideren of isDirty goed genoeg is....
 
             $hasDirtyEntities = false;
 

@@ -4,8 +4,16 @@ namespace Sakwa\Expression\Planner\Strategy;
 
 use Sakwa\Expression\Parser\Element;
 
-class ProcessInversionOperator extends Base {
 
+/**
+ * Class FunctionCallLogicalGrouping
+ *
+ * This optimiser class is used for inverting values while executing expressions flagged with TOKEN_INVERT
+ *
+ * @package Sakwa\Expression\Planner\Strategy
+ */
+class ProcessInversionOperator extends Base
+{
     public function evaluate(\Sakwa\Expression\Parser\Element $element)
     {
         /**

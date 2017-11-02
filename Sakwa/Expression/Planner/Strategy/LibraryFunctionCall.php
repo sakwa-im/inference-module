@@ -5,6 +5,13 @@ namespace Sakwa\Expression\Planner\Strategy;
 use Sakwa\Expression\Parser\Element;
 use Sakwa\Expression\Parser\Element\FunctionCall;
 
+/**
+ * Class FunctionCallLogicalGrouping
+ *
+ * This optimiser class is used for extracting plugin function calls from expressions
+ *
+ * @package Sakwa\Expression\Planner\Strategy
+ */
 class LibraryFunctionCall extends Base
 {
     public function evaluate(\Sakwa\Expression\Parser\Element $element)

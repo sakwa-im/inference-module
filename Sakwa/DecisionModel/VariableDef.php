@@ -98,10 +98,22 @@ class VariableDef extends BaseNode
             case VariableType::character:
                 $this->setValue($record->charVariableValue);
                 break;
+
             case VariableType::numeric:
                 $this->setValue($record->intVariableValue);
                 break;
-            //TODO: case verder implementeren.....
+
+            case VariableType::enumeration:
+                $this->setValue($record->enumVariable);
+                break;
+
+            case VariableType::date:
+                $this->setValue($record->dateVariable);
+                break;
+
+            case VariableType::boolean:
+                $this->setValue((boolean)$record->intVariableValue);
+                break;
         }
 
         if (!InitializeMode::isValueEnumValue($record->initializeMode)) {

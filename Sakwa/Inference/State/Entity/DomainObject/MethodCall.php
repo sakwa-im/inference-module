@@ -48,14 +48,10 @@ class MethodCall
      */
     public function callMethod()
     {
-        try {
-            if (!$this->executed) {
-                $this->executed = true;
+        if (!$this->executed) {
+            $this->executed = true;
 
-                //TODO: implement code for calling method
-            }
-        } catch (\Exception $e) {
-            //TODO: implement error handling
+            //TODO: implement code for calling method
         }
     }
 

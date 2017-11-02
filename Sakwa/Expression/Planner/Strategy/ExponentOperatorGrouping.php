@@ -2,11 +2,17 @@
 
 namespace Sakwa\Expression\Planner\Strategy;
 
-use Sakwa\Exception;
 use Sakwa\Expression\Parser\Element;
 
-class ExponentOperatorGrouping extends Base {
-
+/**
+ * Class ExponentOperatorGrouping
+ *
+ * This optimiser class is used for grouping the correct parts of a expression when using a exponent
+ *
+ * @package Sakwa\Expression\Planner\Strategy
+ */
+class ExponentOperatorGrouping extends Base
+{
     public function evaluate(\Sakwa\Expression\Parser\Element $element)
     {
         /**

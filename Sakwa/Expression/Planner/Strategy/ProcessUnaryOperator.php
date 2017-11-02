@@ -4,8 +4,15 @@ namespace Sakwa\Expression\Planner\Strategy;
 
 use Sakwa\Expression\Parser\Element;
 
-class ProcessUnaryOperator extends Base {
-
+/**
+ * Class InterpretMinusOperator
+ *
+ * This optimiser class is used transforming two consecutive "-" or "+" signs to "--" or "++"
+ *
+ * @package Sakwa\Expression\Planner\Strategy
+ */
+class ProcessUnaryOperator extends Base
+{
     public function evaluate(\Sakwa\Expression\Parser\Element $element)
     {
         /**

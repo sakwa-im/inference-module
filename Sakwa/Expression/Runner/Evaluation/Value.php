@@ -10,7 +10,8 @@ class Value
           IS_LITERAL  = 2,
           IS_BOOLEAN  = 3,
           IS_ENTITY   = 4,
-          IS_OPERATOR = 5;
+          IS_OPERATOR = 5,
+          IS_DATE     = 6;
 
     /**
      * @var integer
@@ -36,6 +37,14 @@ class Value
 
         $this->value = $value;
         $this->valueType = $valueType;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isNull(): bool
+    {
+        return $this->valueType == self::IS_NULL;
     }
 
     /**
@@ -81,9 +90,9 @@ class Value
     /**
      * @return boolean
      */
-    public function isNull(): bool
+    public function isDate(): bool
     {
-        return $this->valueType == self::IS_NULL;
+        return $this->valueType == self::IS_DATE;
     }
 
 
@@ -100,12 +109,13 @@ class Value
      */
     public function setValue($value)
     {
-        if (($this->isLiteral()  && is_string($value))  ||
+        if (($this->isNull()     && is_null($value))    ||
+            ($this->isLiteral()  && is_string($value))  ||
             ($this->isNumeric()  && is_numeric($value)) ||
             ($this->isOperator() && is_string($value))  ||
-            ($this->isBoolean()  && is_bool($value)) ||
+            ($this->isBoolean()  && is_bool($value))    ||
             ($this->isEntity()   && is_object($value))  ||
-            ($this->isNull()     && is_null($value))) {
+            ($this->isDate()     && is_string($value))) {
             $this->value = $value;
         }
     }

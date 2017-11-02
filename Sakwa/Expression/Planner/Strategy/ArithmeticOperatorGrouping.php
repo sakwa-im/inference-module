@@ -4,8 +4,15 @@ namespace Sakwa\Expression\Planner\Strategy;
 
 use Sakwa\Expression\Parser\Element;
 
-class ArithmeticOperatorGrouping extends Base {
-
+/**
+ * Class ArithmeticOperatorGrouping
+ *
+ * This optimiser class is used for adding grouping in order to insure the correct order of execution
+ *
+ * @package Sakwa\Expression\Planner\Strategy
+ */
+class ArithmeticOperatorGrouping extends Base
+{
     public function evaluate(\Sakwa\Expression\Parser\Element $element)
     {
         /**

@@ -5,8 +5,15 @@ namespace Sakwa\Expression\Planner\Strategy;
 use Sakwa\Expression\Parser\Element;
 use Sakwa\Expression\Parser\Element\FunctionCall;
 
-class FunctionCallLogicalGrouping extends Base {
-
+/**
+ * Class FunctionCallLogicalGrouping
+ *
+ * This optimiser class is used for extracting domain object function calls from expressions
+ *
+ * @package Sakwa\Expression\Planner\Strategy
+ */
+class FunctionCallLogicalGrouping extends Base
+{
     public function evaluate(\Sakwa\Expression\Parser\Element $element)
     {
         /**
@@ -21,7 +28,7 @@ class FunctionCallLogicalGrouping extends Base {
 
         while (!is_null(($childElement = array_shift($childElements)))) {
             if ($childElement->getElementType() == Element::TOKEN_FUNCTION_CALL && count($childElements) > 0) {
-                if($childElements[0]->getElementType() == Element::TOKEN_IDENTIFIER) {
+                if ($childElements[0]->getElementType() == Element::TOKEN_IDENTIFIER) {
                     if (count($elementSet) > 0 && $elementSet[count($elementSet) - 1]->getElementType() == Element::TOKEN_VARIABLE_IDENTIFIER) {
                         $previousItem = array_pop($elementSet);
                         $childElement->setEntityReference($previousItem->getEntityReference());
@@ -37,7 +44,7 @@ class FunctionCallLogicalGrouping extends Base {
                         if ($group->hasChildren()) {
                             $parameters = $this->splitParameterExpressions($group->getChildren());
 
-                            foreach($parameters as $parameter) {
+                            foreach ($parameters as $parameter) {
                                 $this->evaluate($parameter);
                             }
 
@@ -60,6 +67,7 @@ class FunctionCallLogicalGrouping extends Base {
 
     /**
      * @param \Sakwa\Expression\Parser\Element[] $childElements
+     *
      * @return \Sakwa\Expression\Parser\Element[]
      */
     protected function splitParameterExpressions($childElements)
@@ -74,7 +82,7 @@ class FunctionCallLogicalGrouping extends Base {
          */
         $elementSet = array();
 
-        foreach($childElements as $childElement) {
+        foreach ($childElements as $childElement) {
             if ($childElement->getElementType() == Element::TOKEN_PARAMETER_SEPARATOR) {
                 if (count($elementSet) > 0) {
                     $groupElement = new Element(Element::TOKEN_PARAMETER, '');

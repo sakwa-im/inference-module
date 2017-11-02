@@ -4,8 +4,15 @@ namespace Sakwa\Expression\Planner\Strategy;
 
 use Sakwa\Expression\Parser\Element;
 
-class DetectAssignmentOperator extends Base {
-
+/**
+ * Class DetectAssignmentOperator
+ *
+ * This optimiser class is used for detecting the difference between equals sign
+ *
+ * @package Sakwa\Expression\Planner\Strategy
+ */
+class DetectAssignmentOperator extends Base
+{
     public function evaluate(\Sakwa\Expression\Parser\Element $element)
     {
         /**

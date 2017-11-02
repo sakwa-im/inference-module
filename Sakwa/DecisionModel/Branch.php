@@ -14,7 +14,7 @@ class Branch extends BaseNode
     /**
      * @var integer \Sakwa\DecisionModel\Enum\BranchEvaluation
      */
-    protected $branchEvaluation = 0;
+    protected $branchEvaluation = BranchEvaluation::once;
 
     /**
      * @var string
@@ -39,7 +39,6 @@ class Branch extends BaseNode
     {
         $this->_base_fill($record);
 
-        //TODO: what should we do with empty strings?
         if (!is_null($record->branchEvaluation) && $record->branchEvaluation != '') {
             if (BranchEvaluation::isValueEnumValue($record->branchEvaluation)) {
                 $this->branchEvaluation = BranchEvaluation::getEnumValue($record->branchEvaluation);
@@ -56,13 +55,5 @@ class Branch extends BaseNode
     public function getBranchEvaluation()
     {
         return $this->branchEvaluation;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBranchOperator()
-    {
-        return $this->branchOperator;
     }
 }

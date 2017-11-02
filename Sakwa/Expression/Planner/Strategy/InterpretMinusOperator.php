@@ -4,8 +4,15 @@ namespace Sakwa\Expression\Planner\Strategy;
 
 use Sakwa\Expression\Parser\Element;
 
-class InterpretMinusOperator extends Base {
-
+/**
+ * Class InterpretMinusOperator
+ *
+ * This optimiser class is used for interpreting the correct meening of the minus sign
+ *
+ * @package Sakwa\Expression\Planner\Strategy
+ */
+class InterpretMinusOperator extends Base
+{
     public function evaluate(\Sakwa\Expression\Parser\Element $element)
     {
         /**

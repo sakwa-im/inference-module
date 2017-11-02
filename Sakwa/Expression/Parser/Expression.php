@@ -275,10 +275,10 @@ class Expression extends Base
                 if (isset($this->expression[++$this->index])) {
                     $this->setCurrentCharacter($this->expression[$this->index]);
                 }
-
                 $this->newToken = true;
                 $newTokenType   = $tokenType;
                 break;
+
             case self::TRANSITION_LITERAL_TO_LITERAL:
                 if ($this->isEscapeCharacter) {
                     $this->newToken = false;

@@ -4,9 +4,15 @@ namespace Sakwa\Expression\Planner\Strategy;
 
 use Sakwa\Expression\Parser\Element;
 
+/**
+ * Class DatatypeDependentOperatorPrecedenceGrouping
+ *
+ * This optimiser class is used to ensure 4 + 4 + "4" + 4 + 4 will answer "848"
+ *
+ * @package Sakwa\Expression\Planner\Strategy
+ */
 class DatatypeDependentOperatorPrecedenceGrouping extends Base
 {
-
     public function evaluate(\Sakwa\Expression\Parser\Element $element)
     {
         /**
