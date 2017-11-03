@@ -91,7 +91,14 @@ class Evaluation extends Base
         return in_array($this->operator, $operator_keys);
     }
 
-
+    /**
+     * Function for adding\concatenating the left and right values
+     *
+     * @param mixed $elementLeft
+     * @param mixed $elementRight
+     *
+     * @return \Sakwa\Expression\Runner\Evaluation\Value
+     */
     protected function evaluateAdition($elementLeft, $elementRight)
     {
         if ($this->elementLeft->isLiteral() || $this->elementRight->isLiteral()) {
@@ -100,59 +107,146 @@ class Evaluation extends Base
         return new Value($elementLeft + $elementRight);
     }
 
+    /**
+     * Function for subtracting the right value from the left value
+     *
+     * @param mixed $elementLeft
+     * @param mixed $elementRight
+     *
+     * @return \Sakwa\Expression\Runner\Evaluation\Value
+     */
     protected function evaluateMinus($elementLeft, $elementRight)
     {
         return new Value($elementLeft - $elementRight);
     }
 
+    /**
+     * Function for dividing the left value with the right value
+     *
+     * @param mixed $elementLeft
+     * @param mixed $elementRight
+     *
+     * @return \Sakwa\Expression\Runner\Evaluation\Value
+     */
     protected function evaluateDevision($elementLeft, $elementRight)
     {
         return new Value($elementLeft / $elementRight);
     }
 
+    /**
+     * Function for multiplying the left value with the right value
+     *
+     * @param mixed $elementLeft
+     * @param mixed $elementRight
+     *
+     * @return \Sakwa\Expression\Runner\Evaluation\Value
+     */
     protected function evaluateMultiplication($elementLeft, $elementRight)
     {
         return new Value($elementLeft * $elementRight);
     }
 
+    /**
+     * This function calculates the exponent of the left value
+     *
+     * @param mixed $elementLeft
+     * @param mixed $elementRight
+     *
+     * @return \Sakwa\Expression\Runner\Evaluation\Value
+     */
     protected function evaluatePow($elementLeft, $elementRight)
     {
         return new Value(pow($elementLeft, $elementRight));
     }
 
+    /**
+     * This function calculate the modulus of the left value based on the right value
+     *
+     * @param mixed $elementLeft
+     * @param mixed $elementRight
+     *
+     * @return \Sakwa\Expression\Runner\Evaluation\Value
+     */
     protected function evaluateModulus($elementLeft, $elementRight)
     {
         return new Value($elementLeft % $elementRight);
     }
 
+    /**
+     * Function for evaluating if the left value is equal to the right value, function returns a boolean value
+     *
+     * @param mixed $elementLeft
+     * @param mixed $elementRight
+     *
+     * @return \Sakwa\Expression\Runner\Evaluation\Value
+     */
     protected function evaluateEquals($elementLeft, $elementRight)
     {
         return new Value(($elementLeft == $elementRight), Value::IS_BOOLEAN);
     }
 
+    /**
+     * Function for evaluating if the right value is lover then the left value, function returns a boolean value
+     *
+     * @param mixed $elementLeft
+     * @param mixed $elementRight
+     *
+     * @return \Sakwa\Expression\Runner\Evaluation\Value
+     */
     protected function evaluateLower($elementLeft, $elementRight)
     {
         return new Value($elementLeft < $elementRight);
     }
 
+    /**
+     * Function for evaluating if the right value is greater then the left value, function returns a boolean value
+     *
+     * @param mixed $elementLeft
+     * @param mixed $elementRight
+     *
+     * @return \Sakwa\Expression\Runner\Evaluation\Value
+     */
     protected function evaluateGreater($elementLeft, $elementRight)
     {
         return new Value($elementLeft > $elementRight);
     }
 
+    /**
+     * Function for evaluating if the left value is not equal to the right value, function returns a boolean value
+     *
+     * @param mixed $elementLeft
+     * @param mixed $elementRight
+     *
+     * @return \Sakwa\Expression\Runner\Evaluation\Value
+     */
     protected function evaluateNotEqual($elementLeft, $elementRight)
     {
         return new Value(($elementLeft != $elementRight), Value::IS_BOOLEAN);
     }
 
+    /**
+     * Function for evaluating if the right value is lover then or equal to the left value, function returns a boolean value
+     *
+     * @param mixed $elementLeft
+     * @param mixed $elementRight
+     *
+     * @return \Sakwa\Expression\Runner\Evaluation\Value
+     */
     protected function evaluateLowerThenEquals($elementLeft, $elementRight)
     {
         return new Value(($elementLeft <= $elementRight), Value::IS_BOOLEAN);
     }
 
+    /**
+     * Function for evaluating if the right value is greater then or equal to the left value, function returns a boolean value
+     *
+     * @param mixed $elementLeft
+     * @param mixed $elementRight
+     *
+     * @return \Sakwa\Expression\Runner\Evaluation\Value
+     */
     protected function evaluateGreaterThenEquals($elementLeft, $elementRight)
     {
         return new Value(($elementLeft >= $elementRight), Value::IS_BOOLEAN);
     }
-
 }

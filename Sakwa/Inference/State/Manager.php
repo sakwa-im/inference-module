@@ -143,7 +143,6 @@ class Manager
      */
     public function addEntity(\Sakwa\Inference\State\Entity\Base $entity)
     {
-
         if ($entity instanceof \Sakwa\Inference\State\Entity\Variable) {
             $this->addVariable($entity);
         } else
