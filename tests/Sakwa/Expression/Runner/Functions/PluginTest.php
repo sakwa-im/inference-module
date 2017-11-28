@@ -60,10 +60,33 @@ class PluginTest extends \PHPUnit\Framework\TestCase
     {
         return array(
             array('sum(10)', 10),
+            array('abs(-10)', 10),
             array('sum (10, 22)', 32),
             array('max(42, -63)', 42),
+            array('min(42, -63)', -63),
             array('80 + sum (10, 20, 30) + max(42, 63)', 203)
         );
+    }
+
+    /**
+     * @test
+     */
+    public function shouldUseFunctionForDescriptionNameWhenNoDockblockExists()
+    {
+        $plugin = new PluginTestWithoutDocumentationClass();
+        $definition = $plugin->getDefinition();
+
+        $this->assertEquals('plugintestwithoutdocumentationclass', $definition['description']);
+    }
+
+    /**
+     * @test
+     * @expectedException \Sakwa\Exception
+     */
+    public function shouldPluginWithoutCorrectImplementationThrowException()
+    {
+        $plugin = new PluginTestNoFunction();
+        $plugin->execute();
     }
 }
 
@@ -79,4 +102,17 @@ class PluginTestClass extends Base
     {
         //
     }
+}
+
+class PluginTestWithoutDocumentationClass extends Base
+{
+    public function plugintestwithoutdocumentationclass()
+    {
+        //
+    }
+}
+
+class PluginTestNoFunction extends Base
+{
+    //
 }

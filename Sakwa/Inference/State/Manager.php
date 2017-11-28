@@ -159,7 +159,7 @@ class Manager
     public function getEntity(\Sakwa\Utils\Guid $guid)
     {
         if (!isset($this->entity_references_by_guid[(string)$guid])) {
-            return null; //TODO: Error handling
+            return null; //TODO: Error handling?
         }
 
         return $this->entity_references_by_guid[(string)$guid];

@@ -18,6 +18,7 @@ class ParserTest extends \PHPUnit\Framework\TestCase
         $actualResult = $element->__toString();
 
         $this->assertEquals($expectedResult, $actualResult);
+        $this->assertEquals($expression, $parser->getExpression());
     }
 
     public function dataProviderShouldEvaluateExpressionsCorrectly()

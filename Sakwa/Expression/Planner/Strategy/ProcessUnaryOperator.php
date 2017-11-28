@@ -26,7 +26,7 @@ class ProcessUnaryOperator extends Base
         $childElements = $element->getChildren();
 
         while (!is_null(($childElement = array_shift($childElements)))) {
-            if ($childElement->getElementType() == Element::TOKEN_LOGIC_OPERATOR && $childElement->getToken() == '=') {
+            if ($childElement->getElementType() == Element::TOKEN_ASSIGNMENT_OPERATOR && $childElement->getToken() == '=') {
                 if (count($elementSet) > 0 && $elementSet[count($elementSet) - 1]->getElementType() == Element::TOKEN_OPERATOR) {
                     $previousItem = array_pop($elementSet);
                     $childElement->setToken($previousItem->getToken() . $childElement->getToken());

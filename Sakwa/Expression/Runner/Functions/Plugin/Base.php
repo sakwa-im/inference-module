@@ -16,40 +16,47 @@ abstract class Base
         $rawClassName = get_class($this);
         $className    = substr($rawClassName, strrpos($rawClassName, '\\') + 1);
         $functionName = strtolower($className);
-
-        $reflection = new ReflectionMethod($rawClassName, $functionName);
         $parameters = array();
 
-        foreach ($reflection->getParameters() as $parameter) {
-            $parameters[$parameter->getPosition()] = array('name'     => $parameter->getName(),
-                                                           'default'  => $parameter->isDefaultValueAvailable() ? $parameter->getDefaultValue() : null,
-                                                           'optional' => $parameter->isOptional(),
-                                                           'variadic' => $parameter->isVariadic());
-        }
+        try {
+            $reflection = new ReflectionMethod($rawClassName, $functionName);
 
-        $description = $reflection->getDocComment();
-
-        if ($description !== false) {
-            $descriptionLines = explode("\n", $description);
-            $lines = array();
-
-            foreach ($descriptionLines as $line) {
-                $line = trim($line, "\t /*");
-
-                if (strlen($line) == 0) {
-                    continue;
-                }
-
-                if ($line[0] == '@') {
-                    continue;
-                }
-
-                $lines[] = $line;
+            foreach ($reflection->getParameters() as $parameter) {
+                $parameters[$parameter->getPosition()] = array(
+                    'name'     => $parameter->getName(),
+                    'default'  => $parameter->isDefaultValueAvailable() ? $parameter->getDefaultValue() : null,
+                    'optional' => $parameter->isOptional(),
+                    'variadic' => $parameter->isVariadic()
+                );
             }
 
-            $description = implode("\n", $lines);
+            $description = $reflection->getDocComment();
+
+            if ($description !== false) {
+                $descriptionLines = explode("\n", $description);
+                $lines = array();
+
+                foreach ($descriptionLines as $line) {
+                    $line = trim($line, "\t /*");
+
+                    if (strlen($line) == 0) {
+                        continue;
+                    }
+
+                    if ($line[0] == '@') {
+                        continue;
+                    }
+
+                    $lines[] = $line;
+                }
+
+                $description = implode("\n", $lines);
+            }
+            else {
+                $description = $functionName;
+            }
         }
-        else {
+        catch(\Exception $e) {
             $description = $functionName;
         }
 

@@ -9,9 +9,10 @@
         </testsuite>
     </testsuites>
 
+    <!-- Code Coverage config -->
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
+            <directory>Sakwa</directory>
         </whitelist>
     </filter>
 </phpunit>

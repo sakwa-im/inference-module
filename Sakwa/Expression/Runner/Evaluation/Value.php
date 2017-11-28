@@ -26,8 +26,8 @@ class Value
     /**
      * Value constructor.
      *
-     * @param mixed $value
-     * @param bool  $isLiteral
+     * @param mixed   $value
+     * @param integer $valueType
      */
     public function __construct($value, $valueType = self::IS_NUMERIC)
     {

@@ -13,12 +13,13 @@ class Planner
      * @var string[] $rules
      */
     protected static $rules = array(
+        '\Sakwa\Expression\Planner\Strategy\DetectAssignmentOperatorIteration1',
         '\Sakwa\Expression\Planner\Strategy\InterpretMinusOperator',
         '\Sakwa\Expression\Planner\Strategy\ExponentOperatorGrouping',
         '\Sakwa\Expression\Planner\Strategy\ArithmeticOperatorGrouping',
         '\Sakwa\Expression\Planner\Strategy\LogicOperatorGrouping',
         '\Sakwa\Expression\Planner\Strategy\ProcessInversionOperator',
-        '\Sakwa\Expression\Planner\Strategy\DetectAssignmentOperator',
+        '\Sakwa\Expression\Planner\Strategy\DetectAssignmentOperatorIteration2',
         '\Sakwa\Expression\Planner\Strategy\ProcessUnaryOperator',
         '\Sakwa\Expression\Planner\Strategy\DatatypeDependentOperatorPrecedenceGrouping',
         '\Sakwa\Expression\Planner\Strategy\FunctionCallLogicalGrouping',

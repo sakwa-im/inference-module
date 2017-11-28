@@ -53,6 +53,7 @@ class Runner {
     /**
      * @param \Sakwa\Expression\Parser\Element $element $element
      * @return \Sakwa\Expression\Runner\Evaluation\Value
+     * @throws \Sakwa\Exception
      */
     protected function runElement(\Sakwa\Expression\Parser\Element $element)
     {

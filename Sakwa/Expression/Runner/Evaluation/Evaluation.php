@@ -9,10 +9,6 @@ use Sakwa\Exception;
  */
 class Evaluation extends Base
 {
-    /**
-     * @var string $operator
-     */
-    protected $operator;
 
     /**
      * @var array $operators
@@ -24,37 +20,19 @@ class Evaluation extends Base
         '*'  => 'multiplication',
         '^'  => 'pow',
         '%'  => 'modulus',
-        '!'  => 'evaluateNotEqual',
-        '>'  => 'lower',
-        '<'  => 'greater',
+        '!'  => 'notEqual',
+        '>'  => 'greater',
+        '<'  => 'lower',
         '==' => 'equals',
         '!=' => 'notEqual',
         '<=' => 'lowerThenEquals',
         '>=' => 'greaterThenEquals');
 
     /**
-     * Evaluation constructor.
-     *
-     * @param Value $elementLeft
-     * @param Value $elementRight
-     * @param Value $operator
-     */
-    public function __construct($elementLeft, $elementRight, $operator)
-    {
-        parent::__construct($elementLeft, $elementRight);
-        /**
-         * @var \Sakwa\Expression\Parser\Element $element
-         */
-        $element = $operator->getValue();
-
-        $this->operator = $element->getToken();
-    }
-
-    /**
      * Returns the calculated result.
      *
      * @return Value
-     * @throws Exception
+     * @throws \Sakwa\Exception
      */
     public function evaluate()
     {

@@ -26,7 +26,7 @@ class Factory
         $element = $operator->getValue();
 
         if ($element->getElementType() == Element::TOKEN_ASSIGNMENT_OPERATOR) {
-            return new Assignment($elementLeft, $elementRight);
+            return new Assignment($elementLeft, $elementRight, $operator);
         }
         else {
             return new Evaluation($elementLeft, $elementRight, $operator);

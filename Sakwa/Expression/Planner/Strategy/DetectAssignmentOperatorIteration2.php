@@ -11,7 +11,7 @@ use Sakwa\Expression\Parser\Element;
  *
  * @package Sakwa\Expression\Planner\Strategy
  */
-class DetectAssignmentOperator extends Base
+class DetectAssignmentOperatorIteration2 extends Base
 {
     public function evaluate(\Sakwa\Expression\Parser\Element $element)
     {

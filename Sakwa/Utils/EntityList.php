@@ -87,7 +87,18 @@ class EntityList implements ArrayAccess, Iterator
             if (!is_null($this->currentEntity) && $this->currentEntity->is($this->entities[$index])) {
                 $this->previous();
             }
-            unset($this->entities[$index]);
+
+            $keys = array_keys($this->entities);
+
+            if (count($keys) > 0) {
+                $rewind = ($keys[0] == $index);
+
+                unset($this->entities[$index]);
+
+                if ($rewind) {
+                    $this->rewind();
+                }
+            }
         }
     }
 
@@ -236,7 +247,6 @@ class EntityList implements ArrayAccess, Iterator
             $this->add($value);
         }
         else {
-
             if ($offset instanceof \Sakwa\Utils\Guid) {
                 if ($offset === $value || (is_bool($value) && $value)) {
                     $this->add($offset);
@@ -248,6 +258,7 @@ class EntityList implements ArrayAccess, Iterator
                 }
             }
         }
+
         return;
     }
 
@@ -344,8 +355,6 @@ class EntityList implements ArrayAccess, Iterator
                     $this->currentEntity = $previous_entity;
                     break;
                 }
-
-                $previous_entity = $entity;
             }
         }
     }

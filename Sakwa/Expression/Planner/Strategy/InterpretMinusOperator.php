@@ -21,11 +21,6 @@ class InterpretMinusOperator extends Base
         $elementSet = array();
 
         /**
-         * @var Element[] $elementGroups
-         */
-        $elementGroups = array();
-
-        /**
          * @var Element $currentElement
          */
         $currentElement;
@@ -61,7 +56,7 @@ class InterpretMinusOperator extends Base
                         $previousPreviousElement = ($i > 1) ? $childElements[$i - 2] : null;
 
                         if ($previousElement->getElementType() == Element::TOKEN_OPERATOR && $previousElement->getToken() == '-') {
-                            if (is_null($previousPreviousElement) || in_array($previousPreviousElement->getElementType(), array(Element::TOKEN_OPERATOR))) {
+                            if (is_null($previousPreviousElement) || in_array($previousPreviousElement->getElementType(), array(Element::TOKEN_OPERATOR, Element::TOKEN_PARAMETER_SEPARATOR))) {
                                 if ($currentElement->getElementType() == Element::TOKEN_NUMBER) {
                                     $currentElement->setToken($previousElement->getToken() . $currentElement->getToken());
                                 }

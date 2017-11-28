@@ -36,7 +36,8 @@ class PlannerTest extends \PHPUnit\Framework\TestCase
             array('4+4+"4"+4+4',                                              '(4 + 4) + "4" + (4 + 4)'),
             array('2^-(2+2)',                                                 '(2 ^ (-1 * (2 + 2)))'),
             array('a--',                                                      'a --'),
-            array('a--1',                                                     'a + 1')
+            array('1 ==== 1',                                                 '1 == 1'),
+            array('1 - -1',                                                   '1 + 1')
         );
     }
 }

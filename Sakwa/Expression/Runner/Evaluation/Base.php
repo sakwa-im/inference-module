@@ -21,15 +21,28 @@ abstract class Base
     protected $elementRight;
 
     /**
+     * @var string $operator
+     */
+    protected $operator;
+
+    /**
      * Evaluation constructor.
      *
      * @param Value $elementLeft
      * @param Value $elementRight
+     * @param Value $operator
      */
-    public function __construct($elementLeft, $elementRight)
+    public function __construct($elementLeft, $elementRight, $operator)
     {
         $this->elementLeft = $elementLeft;
         $this->elementRight = $elementRight;
+
+        /**
+         * @var \Sakwa\Expression\Parser\Element $element
+         */
+        $element = $operator->getValue();
+
+        $this->operator = $element->getToken();
     }
 
     /**

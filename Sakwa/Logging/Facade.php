@@ -72,6 +72,14 @@ class Facade {
     }
 
     /**
+     * @param \Logger $logger
+     */
+    public function setLogger($logger)
+    {
+        $this->log = $logger;
+    }
+
+    /**
      * Log a message object with the TRACE level.
      *
      * @param mixed $message message

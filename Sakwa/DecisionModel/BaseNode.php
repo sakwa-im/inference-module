@@ -236,7 +236,6 @@ class BaseNode
      */
     public function getReferenceRegistry()
     {
-
         return \Sakwa\Utils\Registry::getInstance($this->getGuid());
     }
 

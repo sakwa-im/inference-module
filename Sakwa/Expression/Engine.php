@@ -30,7 +30,7 @@ class Engine
         $cacheController = CacheController::getInstance();
         $element = null;
 
-        if ($this->cacheEnabled && $cacheController->has($this->expression)) {
+        if ($this->isCacheEnabled() && $cacheController->has($this->expression)) {
             $element = $cacheController->get($this->expression);
         }
 
@@ -38,7 +38,7 @@ class Engine
             $element = $this->parseExpression($this->expression);
             $element = $this->planExpression($element);
 
-            if ($this->cacheEnabled) {
+            if ($this->isCacheEnabled()) {
                 $cacheController->set($this->expression, $element);
             }
         }
@@ -110,5 +110,13 @@ class Engine
     public function disableCaching()
     {
         $this->cacheEnabled = false;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isCacheEnabled()
+    {
+        return $this->cacheEnabled;
     }
 }
