@@ -4,7 +4,6 @@ use Sakwa\Persistence\XmlPersistence;
 
 class XmlPersistenceTest extends \PHPUnit\Framework\TestCase
 {
-
     /**
      * @test
      * @expectedException \Sakwa\Exception

@@ -25,7 +25,6 @@ class Factory {
                 return new Root($node);
                 break;
 
-
             case \Sakwa\DecisionModel\Enum\NodeType::VarDefinition:
                 return new VariableDef($node);
                 break;

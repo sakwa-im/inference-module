@@ -30,9 +30,9 @@ class VariableDef extends BaseNode
      * @param string $name
      * @param int $type
      */
-    public function __construct($name, $type = null)
+    public function __construct($name, $type = Enum\NodeType::VarDefinition)
     {
-        parent::__construct($name, Enum\NodeType::VarDefinition);
+        parent::__construct($name, $type);
     }
 
     /**
@@ -88,12 +88,6 @@ class VariableDef extends BaseNode
      */
     protected function _fill(\Sakwa\Persistence\Record $record)
     {
-        if (!VariableType::isValueEnumValue($record->variableType)) {
-            throw new Exception('Invalid variable type detected!');
-        }
-
-        $this->setVariableType(VariableType::getEnumValue($record->variableType));
-
         switch ($this->getVariableType()) {
             case VariableType::character:
                 $this->setValue($record->charVariableValue);

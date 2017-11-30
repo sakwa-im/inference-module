@@ -129,7 +129,7 @@ class Record
 
         // fill object by reflecting current record on object
         foreach ($inst as $key => &$val) {
-            if ($persistence->hasField($key)) {
+            if ($persistence->hasField($inst->convertCase($key))) {
                 $val = $persistence->getFieldValue($inst->convertCase($key), null);
             }
         }

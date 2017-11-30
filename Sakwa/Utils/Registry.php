@@ -58,6 +58,10 @@ class Registry
             }
         }
 
+        if (is_null(self::$global_context)) {
+            self::$global_context = new Guid();
+        }
+
         if (!isset(self::$instance["{$context}"])) {
             if (!$context->is(self::$global_context)) {
                 self::debug('Creating new context: '.$context);

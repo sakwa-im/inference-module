@@ -32,10 +32,10 @@ interface IPersistence
      *
      * @return mixed
      */
-    public function getFieldValue($name, $defaultValue);
+    public function getFieldValue($name, $defaultValue = null);
 
     /**
-     * @param string $name
+     * @param boolean $name
      */
     public function hasField($name);
 }

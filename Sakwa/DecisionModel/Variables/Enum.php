@@ -4,6 +4,7 @@ namespace Sakwa\DecisionModel\Variables;
 
 use Sakwa\DecisionModel\VariableDef;
 use Sakwa\DecisionModel\Enum\VariableType;
+use Sakwa\DecisionModel\Enum\NodeType;
 
 class Enum extends VariableDef
 {
@@ -11,7 +12,8 @@ class Enum extends VariableDef
 
     public function __construct($name, $type = null)
     {
-        parent::__construct($name, VariableType::$enum);
+        $this->setVariableType(VariableType::enumeration);
+        parent::__construct($name, NodeType::VarDefinition);
     }
 
     protected function _fill(

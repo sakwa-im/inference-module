@@ -4,6 +4,7 @@ namespace Sakwa\DecisionModel\Variables;
 
 use Sakwa\DecisionModel\VariableDef;
 use Sakwa\DecisionModel\Enum\VariableType;
+use Sakwa\DecisionModel\Enum\NodeType;
 
 class Numeric extends VariableDef
 {
@@ -13,7 +14,8 @@ class Numeric extends VariableDef
 
     public function __construct($name, $type = null)
     {
-        parent::__construct($name, VariableType::numeric);
+        $this->setVariableType(VariableType::numeric);
+        parent::__construct($name, NodeType::VarDefinition);
     }
 
     protected function _fill(

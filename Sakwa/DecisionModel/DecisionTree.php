@@ -87,6 +87,7 @@ class DecisionTree extends BaseNode
         }
 
         $node = $this->createNewNode($record);
+
         foreach ($children as $child) {
             $node->addChild($child);
             $child->setParent($node);

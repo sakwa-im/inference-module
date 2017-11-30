@@ -1,7 +1,6 @@
 <?php
 
 use Sakwa\Logging\Facade;
-use Sakwa\Utils\Registry;
 
 class FacadeTest extends \PHPUnit\Framework\TestCase
 {

@@ -28,7 +28,7 @@ class ObjectMapping
      */
     public static function getObjectName($sourceType)
     {
-        if (!\array_key_exists($sourceType, self::$mapping)) {
+        if (!array_key_exists($sourceType, self::$mapping)) {
             throw new Exception('Unknown type: '.$sourceType);
         }
         return self::$mapping[$sourceType];

@@ -4,18 +4,15 @@ namespace Sakwa\DecisionModel\Variables;
 
 use Sakwa\DecisionModel\VariableDef;
 use Sakwa\DecisionModel\Enum\VariableType;
+use Sakwa\DecisionModel\Enum\NodeType;
 
 class Char extends VariableDef
 {
 
     public function __construct($name, $type = null)
     {
-        parent::__construct($name, VariableType::character);
-    }
-
-    public function retrieve()
-    {
-
+        $this->setVariableType(VariableType::character);
+        parent::__construct($name, NodeType::VarDefinition);
     }
 
     protected function _fill(
