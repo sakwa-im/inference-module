@@ -98,6 +98,7 @@ class BaseNode
 
     /**
      * @param \Sakwa\DecisionModel\BaseNode $node
+     * @codeCoverageIgnore
      */
     public function merge(BaseNode $node)
     {
@@ -106,6 +107,7 @@ class BaseNode
 
     /**
      * @param \Sakwa\DecisionModel\BaseNode $node
+     * @codeCoverageIgnore
      */
     public function compare(BaseNode $node)
     {

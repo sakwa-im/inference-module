@@ -36,18 +36,12 @@ abstract class Base
     /**
      * Function for initialising the variable entity
      */
-    protected function initialize()
-    {
-        //This function should be implemented in the sub classes
-    }
+    abstract protected function initialize();
 
     /**
      * Function for reinitializing the variable instance
      */
-    public function reInitialize()
-    {
-        //This function should be implemented in the sub classes
-    }
+    abstract public function reInitialize();
 
     /**
      * Function for retrieving the

@@ -59,14 +59,15 @@ class XmlPersistence implements IPersistence
     public function open()
     {
         if (!file_exists($this->fullFilePath)) {
-
-            throw new \Sakwa\Exception('File "' . $this->fullFilePath . '" does not exist."');
+            $pwd = getcwd();
+            throw new \Sakwa\Exception('File "'.$this->fullFilePath.'" does not exist."');
         }
 
-        $xmlDocument = simplexml_load_file($this->fullFilePath);
-        if ($xmlDocument === false) {
-
-            throw new \Sakwa\Exception('File "' . $this->fullFilePath . '" contains an invalid format."');
+        try {
+            $xmlDocument = simplexml_load_file($this->fullFilePath);
+        }
+        catch(\Exception $e) {
+            throw new \Sakwa\Exception('File "'.$this->fullFilePath.'" contains an invalid format."');
         }
 
         $this->fileVersion = $this->getAttributeValue($xmlDocument, 'version');
@@ -82,8 +83,7 @@ class XmlPersistence implements IPersistence
     {
         if ($this->record == null) {
             $this->recordIterator->rewind();
-        }
-        else {
+        } else {
             $this->recordIterator->next();
         }
 
@@ -111,11 +111,13 @@ class XmlPersistence implements IPersistence
     public function getFieldValue($name, $defaultValue = null)
     {
         $result = $defaultValue;
+
         if ($this->hasField($name)) {
             if (isset($this->record->{$name}->element)) {
+                // @codeCoverageIgnoreStart
                 $result = (array)$this->record->{$name}->element;
-            }
-            else {
+                // @codeCoverageIgnoreEnd
+            } else {
                 $result = (string)$this->record->{$name};
             }
         }

@@ -35,7 +35,7 @@ class DatatypeDependentOperatorPrecedenceGrouping extends Base
                 if ($elementSet[0]->isElementTypeOfTheOperatorFamily()) {
                     $elementGroups[] = array_shift($elementSet);
                 }
-                if ($elementSet[count($elementSet) - 1]->isElementTypeOfTheOperatorFamily()) {
+                if (count($elementSet) > 0 && $elementSet[count($elementSet) - 1]->isElementTypeOfTheOperatorFamily()) {
                     $elementCarry = array_pop($elementSet);
                 }
 

@@ -13,25 +13,37 @@ class Factory
     /**
      * Function for creating an inference module instance
      * @param \Sakwa\Inference\Module\Configuration $configuration
+     * @param array $testData
      * @return \Sakwa\Inference\Module
      */
-    public static function createInferenceModule(\Sakwa\Inference\Module\Configuration $configuration)
+    public static function createInferenceModule(\Sakwa\Inference\Module\Configuration $configuration, $testData = array())
     {
-        $decisionModel = self::loadDecisionModel($configuration);
-        $inferenceModule = new Module($decisionModel);
-        return $inferenceModule;
+        $decisionModel = self::loadDecisionModel($configuration, $testData);
+        return new Module($decisionModel);
     }
 
     /**
      * Function for loading the decision model
      * @param \Sakwa\Inference\Module\Configuration $configuration
+     * @param array $testData
      * @return \Sakwa\DecisionModel\DecisionTree
      */
-    private static function loadDecisionModel(\Sakwa\Inference\Module\Configuration $configuration)
+    private static function loadDecisionModel(\Sakwa\Inference\Module\Configuration $configuration, $testData = array())
     {
-        //TODO: make this smarter when needed
-        self::info('Loading sdm: '.$configuration->getDecisionModelUri());
-        $resource = new \Sakwa\Persistence\XmlPersistence($configuration->getDecisionModelUri());
+        $persistenceDriver = $configuration->getPersistenceDriver();
+
+        switch ($persistenceDriver) {
+            case 'xml':
+                self::info('Loading sdm: '.$configuration->getDecisionModelUri());
+                $resource = new \Sakwa\Persistence\XmlPersistence($configuration->getDecisionModelUri());
+                break;
+
+            case 'test':
+                self::info('Loading persistence test driver');
+                $resource = new \Sakwa\Persistence\TestPersistence($testData);
+                break;
+        }
+
         return new DecisionTree($resource);
     }
 }

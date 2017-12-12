@@ -22,10 +22,27 @@ class RegistryTest extends \PHPUnit\Framework\TestCase
 
         $this->assertInstanceOf('\RegistryCloneTest', $obj);
     }
+
+    /**
+     * @test
+     */
+    public function shouldImplicitlyCreateGlobalContext()
+    {
+        $reg = new RegistryCloneTest();
+        $reg->clearGlobalContext();
+
+        $reg = Registry::getInstance();
+        $this->assertInstanceOf('\\Sakwa\\Utils\\Registry', $reg);
+    }
 }
 
 class RegistryCloneTest extends Registry
 {
+    public function clearGlobalContext()
+    {
+        self::$global_context = null;
+    }
+
     public function __construct()
     {
         //

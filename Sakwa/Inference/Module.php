@@ -64,8 +64,10 @@ class Module
                 $executionModel = $chain->getExecutionModel();
 
                 if (is_null($executionModel)) {
+                    // @codeCoverageIgnoreStart
                     $executionModel = Factory::createModel($childNode);
                     $chain->setExecutionModel($executionModel);
+                    // @codeCoverageIgnoreEnd
                 }
             }
 
@@ -109,7 +111,9 @@ class Module
                 $chain->setExecutionModel($executionModel);
             }
             else {
+                // @codeCoverageIgnoreStart
                 break;
+                // @codeCoverageIgnoreEnd
             }
         }
     }

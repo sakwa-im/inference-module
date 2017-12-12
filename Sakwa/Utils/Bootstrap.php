@@ -1,7 +1,11 @@
 <?php
 
-class Bootstrap {
-
+/**
+ * Class Bootstrap
+ * @codeCoverageIgnore
+ */
+class Bootstrap
+{
     public function __construct()
     {
         $this->initBootstrap();

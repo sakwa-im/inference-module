@@ -161,9 +161,7 @@ class Variable extends Base
         }
 
         //If we where able to resolve a value then we can return it
-        if ($this->getCurrentContext()->hasValue()) {
-            return $this->getCurrentContext()->getValue();
-        }
+        return $this->getCurrentContext()->getValue();
     }
 
     /**

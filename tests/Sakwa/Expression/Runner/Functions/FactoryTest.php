@@ -1,7 +1,6 @@
 <?php
 
-
-use Sakwa\Expression\Engine;
+use Sakwa\Expression\Runner\Functions\Factory;
 
 class FactoryTest extends \PHPUnit\Framework\TestCase
 {
@@ -10,7 +9,7 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
      */
     public function shouldResolvePluginDefinitionCorrectly()
     {
-        $definition = \Sakwa\Expression\Runner\Functions\Factory::getPlugins()['max'];
+        $definition = Factory::getPlugins()['max'];
 
         $this->assertEquals($definition['function'],    'max');
         $this->assertEquals($definition['name'],        'Max');
@@ -37,4 +36,41 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+    /**
+     * @test
+     */
+    public function shouldDetectPluginsWhenGettingAPluginByName()
+    {
+        $obj = new FactoryClearPlugins();
+
+        $data = Factory::getPlugin('abs');
+        $this->assertNotNull($data);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldNotFailWhenGettingTheDefinitionOfANogExistentPlugin()
+    {
+        $data = Factory::getPlugin('plugin_does_not_exist');
+        $this->assertNull($data);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldDetectPluginsWhenCheckingAPluginByName()
+    {
+        $obj = new FactoryClearPlugins();
+
+        $this->assertTrue(Factory::hasPlugin('abs'));
+    }
+}
+
+class FactoryClearPlugins extends Factory
+{
+    public function __construct()
+    {
+        self::$plugins = null;
+    }
 }

@@ -120,7 +120,9 @@ class Manager
             return $this->entity_references_by_guid["$guid"];
         }
         else {
-            return $this->createVariable($guid);
+            $variable = $this->createVariable($guid);
+            $variable->setValue(null);
+            return $variable;
         }
     }
 
@@ -131,10 +133,12 @@ class Manager
      */
     public function createDomainObject($guid = null)
     {
+        // @codeCoverageIgnoreStart
         $domainObject = new DomainObject($guid);
         $this->addDomainObject($domainObject);
 
         return $domainObject;
+        // @codeCoverageIgnoreEnd
     }
 
     /**
@@ -145,9 +149,12 @@ class Manager
     {
         if ($entity instanceof \Sakwa\Inference\State\Entity\Variable) {
             $this->addVariable($entity);
-        } else
+        } else {
+            // @codeCoverageIgnoreStart
             if ($entity instanceof \Sakwa\Inference\State\Entity\DomainObject) {
-            $this->addDomainObject($entity);
+                $this->addDomainObject($entity);
+            }
+            // @codeCoverageIgnoreEnd
         }
     }
 
@@ -179,6 +186,7 @@ class Manager
     /**
      * Function for registering variables in the state object
      * @param \Sakwa\Inference\State\Entity\DomainObject $domain_object
+     * @codeCoverageIgnore
      */
     public function addDomainObject(\Sakwa\Inference\State\Entity\DomainObject $domain_object)
     {
@@ -230,9 +238,12 @@ class Manager
         foreach ($this->entity_references_by_guid as $entity) {
             if ($entity instanceof Variable) {
                 $entity->push($this->current_branch_point);
-            }
-            elseif ($entity instanceof DomainObject) {
-                $entity->executeDeferredMethodCalls();
+            } else {
+                // @codeCoverageIgnoreStart
+                if ($entity instanceof DomainObject) {
+                    $entity->executeDeferredMethodCalls();
+                }
+                // @codeCoverageIgnoreEnd
             }
         }
     }

@@ -186,9 +186,9 @@ class Expression extends Base
             case self::TRANSITION_UNKNOWN_TO_WHITESPACE:
             case self::TRANSITION_UNKNOWN_TO_GROUP:
             case self::TRANSITION_UNKNOWN_TO_PARAMETER_SEPARATOR:
-                $this->newToken = ($this->index > 0);
+                /*$this->newToken = ($this->index > 0);
                 $newTokenType   = $tokenType;
-                break;
+                break;*/
 
             case self::TRANSITION_NUMBER_TO_WHITESPACE:
             case self::TRANSITION_NUMBER_TO_OPERATOR:
@@ -315,26 +315,23 @@ class Expression extends Base
             case self::TRANSITION_LITERAL_TO_IDENTIFIER:
             case self::TRANSITION_LITERAL_TO_OPERATOR:
             case self::TRANSITION_LITERAL_TO_WHITESPACE:
-            case self::TRANSITION_LITERAL_TO_GROUP:
             case self::TRANSITION_LITERAL_TO_VARIABLE_IDENTIFIER:
             case self::TRANSITION_LITERAL_TO_POINT:
 
             case self::TRANSITION_VARIABLE_IDENTIFIER_TO_NUMBER:
             case self::TRANSITION_VARIABLE_IDENTIFIER_TO_IDENTIFIER:
             case self::TRANSITION_VARIABLE_IDENTIFIER_TO_OPERATOR:
-            case self::TRANSITION_VARIABLE_IDENTIFIER_TO_WHITESPACE:
-            case self::TRANSITION_VARIABLE_IDENTIFIER_TO_GROUP:
-            case self::TRANSITION_VARIABLE_IDENTIFIER_TO_LITERAL:
-                //No transition numbers can be part of a identifier
                 $this->isEscapeCharacter = false;
                 $this->newToken = false;
                 $newTokenType   = $this->currentTokenType;
                 break;
 
+            // @codeCoverageIgnoreStart
             default:
                 $this->newToken = true;
                 $newTokenType   = self::TOKEN_UNKNOWN;
                 break;
+            // @codeCoverageIgnoreEnd
         }
 
         if ($this->newToken && $this->currentTokenType != self::TOKEN_WHITESPACE) {

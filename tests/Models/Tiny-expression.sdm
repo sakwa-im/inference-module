@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<records version="0.0">
+  <record>
+    <class-type>sakwa.IRootNodeImpl</class-type>
+    <reference>99fd2891-ea1e-46b4-9dfa-69645534ee9d</reference>
+    <count>4</count>
+    <node-type>Root</node-type>
+    <name>Tiny-model</name>
+    <description>
+    </description>
+    <domain-template>templates\Domain template.sdt</domain-template>
+  </record>
+  <record>
+    <class-type>sakwa.IBaseNodeImpl</class-type>
+    <reference>4736f41c-3fd4-4e54-a344-10f306e7fc30</reference>
+    <count>2</count>
+    <node-type>VariableDefinitions</node-type>
+    <name>Variable definitions</name>
+    <description>
+    </description>
+  </record>
+  <record>
+    <class-type>sakwa.CharVariableImpl</class-type>
+    <reference>55f40bc9-1a61-4d8b-b0f6-60ac9c8074e8</reference>
+    <count>0</count>
+    <node-type>VarDefinition</node-type>
+    <name>param</name>
+    <description>
+    </description>
+    <variable-type>character</variable-type>
+    <initialize-mode>SessionStartDefaultValue</initialize-mode>
+    <persist-mode>Never</persist-mode>
+    <data-connections />
+    <char-variable-value>BB</char-variable-value>
+  </record>
+  <record>
+    <class-type>sakwa.CharVariableImpl</class-type>
+    <reference>0a2fd94c-f654-46d5-904f-ae57e344c848</reference>
+    <count>0</count>
+    <node-type>VarDefinition</node-type>
+    <name>output</name>
+    <description>
+    </description>
+    <variable-type>character</variable-type>
+    <initialize-mode>None</initialize-mode>
+    <persist-mode>Never</persist-mode>
+    <data-connections />
+    <char-variable-value></char-variable-value>
+  </record>
+  <record>
+    <class-type>sakwa.IExpressionImpl</class-type>
+    <reference>93e0cd98-46cc-487a-8c71-1d9f41aa88a5</reference>
+    <count>0</count>
+    <node-type>Expression</node-type>
+    <name>Assignment-1</name>
+    <description>
+    </description>
+    <expression>{0a2fd94c-f654-46d5-904f-ae57e344c848} = "CC"</expression>
+  </record>
+  <record>
+    <class-type>sakwa.IBranchImpl</class-type>
+    <reference>f0db8eae-8d2e-48c7-8351-52ffeec1000a</reference>
+    <count>1</count>
+    <node-type>Branch</node-type>
+    <name>Branch-1</name>
+    <description>
+    </description>
+    <branch-evaluation>Once</branch-evaluation>
+    <expression>{55f40bc9-1a61-4d8b-b0f6-60ac9c8074e8} == "AA"</expression>
+  </record>
+  <record>
+    <class-type>sakwa.IExpressionImpl</class-type>
+    <reference>f203c91b-9678-4f07-9dd5-f7afd017370a</reference>
+    <count>0</count>
+    <node-type>Expression</node-type>
+    <name>Assignment-1</name>
+    <description>
+    </description>
+    <expression>{0a2fd94c-f654-46d5-904f-ae57e344c848} = "AAAAAA"</expression>
+  </record>
+  <record>
+    <class-type>sakwa.IBranchImpl</class-type>
+    <reference>4260c630-e31e-43d9-8814-60e06d6f243f</reference>
+    <count>1</count>
+    <node-type>Branch</node-type>
+    <name>Branch-2</name>
+    <description>
+    </description>
+    <branch-evaluation>Once</branch-evaluation>
+    <expression>{55f40bc9-1a61-4d8b-b0f6-60ac9c8074e8} == "BB"</expression>
+  </record>
+  <record>
+    <class-type>sakwa.IExpressionImpl</class-type>
+    <reference>d92e8487-d89f-406f-837e-c7e38a0e0030</reference>
+    <count>0</count>
+    <node-type>Expression</node-type>
+    <name>Assignment-1</name>
+    <description>
+    </description>
+    <expression>{0a2fd94c-f654-46d5-904f-ae57e344c848} = "BBBBBB"</expression>
+  </record>
+</records>

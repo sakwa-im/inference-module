@@ -5,6 +5,9 @@ use Sakwa\Expression\Engine;
 use Sakwa\Utils\Registry;
 use Sakwa\Utils\Guid;
 use Sakwa\Inference\State;
+use Sakwa\Expression\Parser\Element;
+use Sakwa\Expression\Runner\Evaluation\Assignment;
+use Sakwa\Expression\Runner\Evaluation\Value;
 
 class AssignmentTest extends \PHPUnit\Framework\TestCase
 {
@@ -52,5 +55,19 @@ class AssignmentTest extends \PHPUnit\Framework\TestCase
 
             $this->assertEquals($expectedResult, $result->getValue());
         }
+    }
+
+    /**
+     * @test
+     * @expectedException \Sakwa\Exception
+     */
+    public function shouldFailWhenInvalidOperatorIsUsed()
+    {
+        $value = new Value(1);
+        $element = new Element(Element::TOKEN_ASSIGNMENT_OPERATOR, '!!');
+        $operator = new Value($element, Value::IS_OPERATOR);
+
+        $assignment = new Assignment($value, $value, $operator);
+        $assignment->evaluate();
     }
 }

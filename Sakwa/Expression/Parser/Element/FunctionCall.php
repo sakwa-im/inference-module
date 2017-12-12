@@ -83,7 +83,7 @@ class FunctionCall extends Element
         }
 
         if ($this->hasPlugin()) {
-            return $this->plugin->execute(...$parameters);
+            return $this->getPlugin()->execute(...$parameters);
         }
         else {
             $entityManager = \Sakwa\Inference\State\Manager::getInstance();
@@ -127,10 +127,7 @@ class FunctionCall extends Element
 
             $output[] = $outputToken.'('.implode(', ', $outputChildElement).')';
         }
-        else {
-            $output[] = '.';
-        }
 
-        return implode(' ', $output);
+        return (count($output) > 0) ? implode(' ', $output) : '';
     }
 }
