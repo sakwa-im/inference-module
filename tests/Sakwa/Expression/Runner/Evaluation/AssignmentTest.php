@@ -1,6 +1,5 @@
 <?php
 
-
 use Sakwa\Expression\Engine;
 use Sakwa\Utils\Registry;
 use Sakwa\Utils\Guid;

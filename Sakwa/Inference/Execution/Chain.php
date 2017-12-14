@@ -107,7 +107,7 @@ class Chain
     }
 
     /**
-     * @return null|\Sakwa\Inference\Execution\Model\Base
+     * @return null|\boolean
      */
     public function getNodeEvaluated()
     {

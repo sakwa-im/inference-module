@@ -1,6 +1,5 @@
 <?php
 
-use Sakwa\Expression\Parser\Element\Base;
 use Sakwa\Utils\Guid;
 use Sakwa\Persistence\Record;
 use Sakwa\DecisionModel\BaseNode;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Inference\Module;
+namespace Tests\Inference\Module;
 
 use Sakwa\Inference\Module\Factory;
 use Sakwa\Inference\Module\Configuration;
