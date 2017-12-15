@@ -62,7 +62,9 @@ class Variable extends Base
     protected function initialize()
     {
         $dataDefinition = $this->getDataDefinition();
-        $this->description = $dataDefinition->getDescription();
+        if (!is_null($dataDefinition)) {
+            $this->description = $dataDefinition->getDescription();
+        }
         $this->initializeVariableState();
     }
 
@@ -81,6 +83,10 @@ class Variable extends Base
     protected function initializeVariableState($isReInitialize = false)
     {
         $dataDefinition = $this->getDataDefinition();
+
+        if (is_null($dataDefinition)) {
+            return;
+        }
 
         switch ($dataDefinition->getInitializeMode()) {
             //No action is required here.

@@ -132,6 +132,25 @@ class VariableTest extends \PHPUnit\Framework\TestCase
         $variable->reInitialize();
         $this->assertTrue($variable->isReInitialize);
     }
+
+    /**
+     * @test
+     * @expectedException \Sakwa\Exception
+     */
+    public function shouldNotBeAbleToResetTheContextWithDiffrentValue()
+    {
+        $variable = new Variable($this->guid);
+        $variable->setContext(new Guid());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeAbleToCreateUndefinedVariables()
+    {
+        $variable = new Variable();
+        $this->assertNotNull($variable->getGuid());
+    }
 }
 
 class VariableTestObject extends Variable
